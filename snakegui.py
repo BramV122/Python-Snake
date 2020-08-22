@@ -44,6 +44,18 @@ class SnakeGui(arcade.Window):
         arcade.draw_text("Score = " + str(score), 10, SCREEN_HEIGHT + SCREEN_HEADER/4, arcade.color.WHITE_SMOKE, 24)
         arcade.draw_text("Num moves = " + str(numMoves), 10+SCREEN_WIDTH/2, SCREEN_HEIGHT + SCREEN_HEADER/4, arcade.color.WHITE_SMOKE, 24)
 
+        # Draw text if the game is paused or the player is dead
+        try:
+            dead = self.Core.GetDead()
+            paused = self.Core.GetPaused()
+        except:
+            dead = False
+            paused = False
+        if dead:
+            arcade.draw_text("YOU DIED!", 0, SCREEN_HEIGHT/2, arcade.color.WHITE_SMOKE, 72, width=SCREEN_WIDTH, align="center")
+        elif paused:
+            arcade.draw_text("GAME PAUSED!", 0, SCREEN_HEIGHT/2, arcade.color.WHITE_SMOKE, 72, width=SCREEN_WIDTH, align="center")
+
         # Draw snake body
         self.draw_body()
 
